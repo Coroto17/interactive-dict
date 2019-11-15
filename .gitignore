@@ -1,2 +1,3 @@
 # Learning to work with gitignore files
 notas.txt
+.vscode/
