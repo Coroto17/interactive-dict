@@ -5,8 +5,10 @@ import difflib as dl
 data = json.load(open("data.json"))
 
 def translate(word):
-    if word in data:
-        return data[word]
+    if word.lower() in data:
+        return data[word.lower()]
+    elif word.capitalize() in data:
+        return data[word.capitalize()]
     elif len(dl.get_close_matches(word, list(data), cutoff=0.7)) > 0:
         matches = dl.get_close_matches(word, list(data), cutoff=0.7)[0]
         yes_no = input(f"Did you mean {matches} instead? ").lower()
@@ -19,7 +21,7 @@ def translate(word):
     else:
         return "Word not found. Please try again! " 
 
-query = input("Enter word: ").lower()
+query = input("Enter word: ")
 output = translate(query)
 
 if type(output) == list:
